@@ -1,0 +1,14 @@
+steps:
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud compute ssh student-01-9d11674cd800@rachhu --zone=us-east1-c --command='
+          cd /home/student-01-9d11674cd800/app || mkdir /home/student-01-9d11674cd800/app && cd /home/student-01-9d11674cd800/app;
+          sudo git clone https://github.com/Rachanack2003/python-vm-deploy.git . || sudo git pull;
+          chmod +x start.sh;
+          ./start.sh
+        '
+
+timeout: 900s
