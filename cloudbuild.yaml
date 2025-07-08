@@ -5,8 +5,13 @@ steps:
       - '-c'
       - |
         gcloud compute ssh student-01-9d11674cd800@rachhu --zone=us-east1-c --command='
-          cd /home/student-01-9d11674cd800/app || mkdir /home/student-01-9d11674cd800/app && cd /home/student-01-9d11674cd800/app;
-          sudo git clone https://github.com/Rachanack2003/python-vm-deploy.git . || sudo git pull;
+          mkdir -p /home/student-01-9d11674cd800/app;
+          cd /home/student-01-9d11674cd800/app;
+          if [ ! -d .git ]; then
+            git clone https://github.com/Rachanack2003/python-vm-deploy.git .;
+          else
+            git pull;
+          fi;
           chmod +x start.sh;
           ./start.sh
         '
